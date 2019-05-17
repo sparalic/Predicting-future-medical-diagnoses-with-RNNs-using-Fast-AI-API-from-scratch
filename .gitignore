@@ -71,7 +71,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 3,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -87,7 +87,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 7,
+   "execution_count": 4,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -141,11 +141,11 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 8,
+   "execution_count": 14,
    "metadata": {},
    "outputs": [],
    "source": [
-    "artificalData_seqs = np.array(pickle.load(open('../GRU_EHR/ArtificialEHR_Data.encodedDxs','rb')))"
+    "artificalData_seqs = np.array(pickle.load(open('..data/ArtificialEHR_Data.encodedDxs','rb')))"
    ]
   },
   {
@@ -159,17 +159,17 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 9,
+   "execution_count": 15,
    "metadata": {},
    "outputs": [
     {
      "data": {
       "text/plain": [
-       "array([list([[0, 1, 1], [0, 1, 1, 2, 3], [0, 1, 1, 4, 5, 6]]),\n",
-       "       list([[7, 8, 9], [7, 8, 9, 10]])], dtype=object)"
+       "array([list([[1, 2, 2], [1, 2, 2, 3, 4], [1, 2, 2, 5, 6, 7]]),\n",
+       "       list([[8, 9, 10], [8, 9, 10, 11]])], dtype=object)"
       ]
      },
-     "execution_count": 9,
+     "execution_count": 15,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -180,16 +180,17 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 10,
+   "execution_count": 16,
    "metadata": {},
    "outputs": [
     {
      "data": {
       "text/plain": [
-       "[[[0, 1, 1], [0, 1, 1, 2, 3], [0, 1, 1, 4, 5, 6]], [[7, 8, 9], [7, 8, 9, 10]]]"
+       "[[[1, 2, 2], [1, 2, 2, 3, 4], [1, 2, 2, 5, 6, 7]],\n",
+       " [[8, 9, 10], [8, 9, 10, 11]]]"
       ]
      },
-     "execution_count": 10,
+     "execution_count": 16,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -274,7 +275,20 @@
    "cell_type": "code",
    "execution_count": 13,
    "metadata": {},
-   "outputs": [],
+   "outputs": [
+    {
+     "ename": "RuntimeError",
+     "evalue": "index 11 is out of bounds for dim with size 11",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mRuntimeError\u001b[0m                              Traceback (most recent call last)",
+      "\u001b[0;32m<ipython-input-13-4be327abb63c>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0mx_artifical\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0my_artifical\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmask_artifical\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mlenghts_artifical\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mpadding\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0martificalData_seqs\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0martificalData_seqs\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;36m11\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;36m11\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      2\u001b[0m \u001b[0;31m# 11 represents the number of tokens in the vocab\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;32m<ipython-input-11-69221ed9b849>\u001b[0m in \u001b[0;36mpadding\u001b[0;34m(seqs, labels, inputDimSize, numClass)\u001b[0m\n\u001b[1;32m     13\u001b[0m             \u001b[0mxvec\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0msubseq\u001b[0m\u001b[0;34m]\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;36m1.\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     14\u001b[0m         \u001b[0;32mfor\u001b[0m \u001b[0myvec\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0msubseq\u001b[0m \u001b[0;32min\u001b[0m \u001b[0mzip\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0my\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0midx\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m:\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mlabel\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;36m1\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---> 15\u001b[0;31m             \u001b[0myvec\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0msubseq\u001b[0m\u001b[0;34m]\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;36m1.\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     16\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     17\u001b[0m         \u001b[0mmask\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0mlengths\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0midx\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0midx\u001b[0m\u001b[0;34m]\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;36m1.\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;31mRuntimeError\u001b[0m: index 11 is out of bounds for dim with size 11"
+     ]
+    }
+   ],
    "source": [
     "x_artifical, y_artifical, mask_artifical, lenghts_artifical = padding(artificalData_seqs, artificalData_seqs, 11, 11)\n",
     "# 11 represents the number of tokens in the vocab"
